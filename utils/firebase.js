@@ -1,13 +1,19 @@
 import admin from "firebase-admin";
-import fs from "fs";
-import path from "path";
 
-const __dirname = path.resolve();
+if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
+  throw new Error(
+    "FIREBASE_SERVICE_ACCOUNT environment variable not set. " +
+    "Please add your Firebase service account JSON."
+  );
+}
+let serviceAccount;
+try {
+  serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+} catch (err) {
+  throw new Error("Failed to parse FIREBASE_SERVICE_ACCOUNT: " + err.message);
+}
 
-const serviceAccount = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "key.json"), "utf8")
-);
-
+// Initialize Firebase Admin
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
