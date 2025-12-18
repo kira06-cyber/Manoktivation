@@ -6,7 +6,7 @@ import userRoutes from "./routes/user.js";
 import taskRoutes from "./routes/task.js";
 
 const app = express();
-const PORT = 5000;
+const PORT = 3000;
 
 app.use((req, res, next) => {
   console.log(`📡 Incoming Request: [${req.method}] ${req.url}`);
