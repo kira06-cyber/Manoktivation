@@ -19,11 +19,12 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use("/api/user", userRoutes);
-app.use("/api/task", taskRoutes);
+app.use("/user", userRoutes);
+app.use("/task", taskRoutes);
 
 app.get("/", (req, res) => res.send("Backend is working!"));
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
